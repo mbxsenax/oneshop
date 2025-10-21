@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneShop - Админ панель</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fas fa-store"></i> OneShop</h2>
+        <ul>
+            <li><a href="/"><i class="fas fa-shopping-cart orders-icon"></i> Список всех товаров</a></li>
+            <li><a href="/add_product"><i class="fas fa-plus orders-icon"></i> Добавить товар</a></li>
+            <li><a href="/orders"><i class="fas fa-boxes orders-icon"></i> Заказы</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1>Список товаров</h1>
+
+        <!-- Форма для фильтрации по категориям -->
+        <form method="GET" action="/">
+            <select name="category" onchange="this.form.submit()">
+                <option value="">Все категории</option>
+                {% for category in categories %}
+                <option value="{{ category }}" {% if category == selected_category %}selected{% endif %}>{{ category }}</option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <div class="container">
+            {% for product in products %}
+            <div class="card">
+                <!-- Измененный путь для отображения изображений -->
+                <img src="{{ url_for('static', filename='images/' + product.image_url) }}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p>Цена: {{ product.price }} руб.</p>
+                <p>Количество: {{ product.quantity }}</p>
+                <p>Категория: {{ product.category }}</p>
+                <form method="POST" action="/delete_product/{{ product.id }}">
+                    <button type="submit">Удалить</button>
+                </form>
+                <a href="/edit_product/{{ product.id }}">
+                    <button>Редактировать</button>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

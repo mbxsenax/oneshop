@@ -1,0 +1,40 @@
+/* Пример правильного CSS файла */
+body {
+    background-color: #1e1e1e;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: orange;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background-color: #333;
+    border-radius: 8px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+}
+
+    .card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .card p {
+        font-size: 14px;
+        color: #ccc;
+    }
